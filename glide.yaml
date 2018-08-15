@@ -1,0 +1,12 @@
+package: alerter
+import:
+- package: github.com/BurntSushi/toml
+  version: ^0.3.0
+- package: github.com/coreos/etcd
+  version: ~3.2.15
+  subpackages:
+  - client
+- package: github.com/labstack/echo
+  version: ~3.2.1
+  subpackages:
+  - middleware

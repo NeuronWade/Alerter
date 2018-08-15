@@ -1,0 +1,61 @@
+hash: a272c424e399553af813cc00d7c30d788a4fdb9fa6a88d214f3fef803fb46376
+updated: 2018-08-15T18:25:13.369855523+08:00
+imports:
+- name: github.com/BurntSushi/toml
+  version: b26d9c308763d68093482582cea63d69be07a0f0
+- name: github.com/coreos/etcd
+  version: 420a452267a7ce45b3fcbed04d54030d69964fc1
+  subpackages:
+  - client
+- name: github.com/dgrijalva/jwt-go
+  version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
+- name: github.com/labstack/echo
+  version: b338075a0fc6e1a0683dbf03d09b4957a289e26f
+  subpackages:
+  - middleware
+- name: github.com/labstack/gommon
+  version: 3bc2d333a4c30531c47051369043bcabd62ff4c0
+  subpackages:
+  - bytes
+  - color
+  - log
+  - random
+- name: github.com/mattn/go-colorable
+  version: efa589957cd060542a26d2dd7832fd6a6c6c3ade
+- name: github.com/mattn/go-isatty
+  version: 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c
+- name: github.com/Sirupsen/logrus
+  version: 90150a8ed11b6ce285e77e8af2b0109559ce4777
+- name: github.com/valyala/bytebufferpool
+  version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
+- name: github.com/valyala/fasttemplate
+  version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
+- name: golang.org/x/crypto
+  version: 9419663f5a44be8b34ca85f08abc5fe1be11f8a3
+  subpackages:
+  - acme
+  - acme/autocert
+  - ssh/terminal
+- name: golang.org/x/sys
+  version: 13d03a9a82fba647c21a0ef8fba44a795d0f0835
+  subpackages:
+  - unix
+  - windows
+testImports:
+- name: github.com/gopherjs/gopherjs
+  version: 82b322028c96512b15077093b16a5f1c7ea897ac
+  subpackages:
+  - js
+- name: github.com/jtolds/gls
+  version: 77f18212c9c7edc9bd6a33d383a7b545ce62f064
+- name: github.com/smartystreets/assertions
+  version: 7678a5452ebea5b7090a6b163f844c133f523da2
+  subpackages:
+  - internal/go-render/render
+  - internal/oglematchers
+- name: github.com/smartystreets/goconvey
+  version: 9e8dc3f972df6c8fcc0375ef492c24d0bb204857
+  subpackages:
+  - convey
+  - convey/gotest
+  - convey/reporting
