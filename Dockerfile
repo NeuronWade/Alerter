@@ -6,10 +6,10 @@ RUN apt-get update && \
 
 ENV TZ "Asia/Shanghai"
 
-EXPOSE 21001
-
 WORKDIR /go/src/alerter
 COPY . .
 RUN go install ./
 
-RUN /go/bin/alerter
+EXPOSE 21001
+
+ENTRYPOINT ["/go/bin/alerter"]
