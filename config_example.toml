@@ -1,0 +1,12 @@
+[app]
+server_addr      = ""
+mail_notice      = ""                                   #是否进行邮件通知
+mail_server_addr = ""                                   #邮件服务地址
+server_account   = ""                                   #邮件服务账号
+api_key          = ""                                   #Api密钥
+
+[users]
+mail_list = [
+    "example@example.com"
+]
+
