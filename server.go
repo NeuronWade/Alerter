@@ -24,7 +24,7 @@ type Server struct {
 
 func New() *Server {
 	return &Server{
-		ListenAddr: "127.0.0.1:21001",
+		ListenAddr:  config.App.ServerAddr,
 		loopTicker:  time.NewTicker(LoopInterval),
 		cleanticker: time.NewTicker(ClaneInterval),
 	}

@@ -1,6 +1,7 @@
 package main
 
 type App struct {
+	ServerAddr     string `toml:"server_addr"`
 	ApiKey         string `toml:"api_key"`
 	MailServerAddr string `toml:"mail_server_addr"`
 	ServerAccount  string `toml:"server_account"`

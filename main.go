@@ -27,6 +27,7 @@ func parseConfig() {
 	if _, err := toml.DecodeFile(flags.ConfigPath, &config); err != nil {
 		fmt.Println(err.Error())
 	}
+	configOutputs = append(configOutputs, fmt.Sprintf("[config] listen addr: %s", config.App.ServerAddr))
 	configOutputs = append(configOutputs, fmt.Sprintf("[config] app mail notify: %s", config.App.MailNotify))
 	configOutputs = append(configOutputs, fmt.Sprintf("[config] api key: %s", config.App.ApiKey))
 	configOutputs = append(configOutputs, fmt.Sprintf("[config] mail server addr: %s", config.App.MailServerAddr))
