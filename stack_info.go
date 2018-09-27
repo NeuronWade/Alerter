@@ -9,6 +9,7 @@ type ServerStack struct {
 
 type StackInfo struct {
 	StackLines []string
+	Env        string
 	Times      int32
 	Level      string
 	PanicTime  int64
@@ -18,4 +19,11 @@ type StackInfo struct {
 
 var serverStack = &ServerStack{
 	StackList: make(map[string]*StackInfo),
+}
+
+func (s *StackInfo) GetStackLines() (info string) {
+	for _, line := range s.StackLines {
+		info += line + "\n"
+	}
+	return info
 }

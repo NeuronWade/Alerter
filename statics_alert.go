@@ -8,11 +8,13 @@ import (
 
 func StaticsAlert(c echo.Context) error {
 	info := c.FormValue("stack_info")
-
+	env := c.FormValue("env_info")
 	var arrStr []string
 
 	var stackHead string
 	stackInfo := &StackInfo{}
+
+	stackInfo.Env = env
 
 	arrStr = strings.Split(info, "\n")
 	for _, str := range arrStr {
@@ -41,7 +43,7 @@ func StaticsAlert(c echo.Context) error {
 		if stackTimes == LevelList[1].Times || stackTimes == LevelList[2].Times ||
 			stackTimes == LevelList[3].Times || stackTimes == LevelList[4].Times {
 			for _, mailAddr := range config.Users.MailList {
-				go AlertToUser(mailAddr, info, serverStack.StackList[stackHead].PanicTime, stackTimes)
+				go AlertToUser(mailAddr, serverStack.StackList[stackHead])
 			}
 		}
 	}

@@ -12,7 +12,7 @@ import (
 // 邮件内容
 const (
 	AlertMailSubject = "服务器报警邮件"
-	AlertMailContent = "服务器于#param1#发生#param2#级报警; 此警告已经连续触发#param3#次 \n堆栈信息:\n#param4#        \n\n---- 来自系统自动发送"
+	AlertMailContent = "服务器于#param2#发生#param3#级报警; 此警告已经连续触发#param4#次 \n堆栈信息:\n#param5#        \n\n---- 来自系统自动发送"
 )
 
 const (
@@ -34,12 +34,12 @@ func init() {
 	LevelList[4] = LevelInfo{Name: "严重", Times: 100}
 }
 
-func AlertToUser(userMail, content string, panicTime int64, times int32) (int, error) {
+func AlertToUser(userMail string, stackInfo *StackInfo) (int, error) {
 
 	url := config.App.MailServerAddr
 
-	levelTitle := calcLevel(times)
-	mailContent := setMailContent(panicTime, levelTitle, times, content)
+	levelTitle := calcLevel(stackInfo.Times)
+	mailContent := setMailContent(stackInfo.PanicTime, levelTitle, stackInfo.Times, stackInfo.GetStackLines(), stackInfo.Env)
 	mailSubject := levelTitle + AlertMailSubject
 
 	payload := strings.NewReader("------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"from\"\r\n\r\nExcited User <" + config.App.ServerAccount + ">\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"to\"\r\n\r\n" + userMail + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"subject\"\r\n\r\n" + mailSubject + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"text\"\r\n\r\n" + mailContent + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--")
@@ -70,12 +70,13 @@ func calcLevel(level int32) string {
 	return "[" + levelName + "]"
 }
 
-func setMailContent(panicTime int64, levelName string, times int32, stackinfo string) string {
+func setMailContent(panicTime int64, levelName string, times int32, stackinfo, env string) string {
 
 	tm := time.Unix(panicTime, 0)
 	formatTime := tm.Format("2006-01-02 15:04:05")
 
 	var paramsMailContent []string
+	paramsMailContent = append(paramsMailContent, env)
 	paramsMailContent = append(paramsMailContent, formatTime)
 	paramsMailContent = append(paramsMailContent, levelName)
 	paramsMailContent = append(paramsMailContent, fmt.Sprintf("%d", times))
@@ -87,6 +88,7 @@ func setMailContent(panicTime int64, levelName string, times int32, stackinfo st
 	rawContent = strings.Replace(rawContent, "#param2#", paramsMailContent[1], -1)
 	rawContent = strings.Replace(rawContent, "#param3#", paramsMailContent[2], -1)
 	rawContent = strings.Replace(rawContent, "#param4#", paramsMailContent[3], -1)
+	rawContent = strings.Replace(rawContent, "#param5#", paramsMailContent[4], -1)
 
 	return rawContent
 }
