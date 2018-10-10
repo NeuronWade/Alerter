@@ -12,7 +12,7 @@ import (
 // 邮件内容
 const (
 	AlertMailSubject = "服务器报警邮件"
-	AlertMailContent = "服务器于#param2#发生#param3#级报警; 此警告已经连续触发#param4#次 \n堆栈信息:\n#param5#        \n\n---- 来自系统自动发送"
+	AlertMailContent = "服务器[#param1#]于#param2#发生#param3#级报警; 此警告已经连续触发#param4#次 \n堆栈信息:\n#param5#        \n\n---- 来自系统自动发送"
 )
 
 const (
